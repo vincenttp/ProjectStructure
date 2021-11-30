@@ -1,14 +1,16 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
     defaultConfig {
         applicationId "id.vincenttp.projectstructure"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -53,11 +55,13 @@ android {
             resValue "string", "app_name", "Project Structure"
         }
     }
-
-
-    dynamicFeatures = [":dynamic_feature"]
-
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 kapt {
@@ -65,11 +69,6 @@ kapt {
 }
 
 dependencies {
-    api 'com.android.support:appcompat-v7:28.0.0'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
-
     implementation project(":domain")
     implementation project(":data")
 
@@ -80,18 +79,11 @@ dependencies {
     androidTestImplementation tests.runner
     androidTestImplementation tests.espresso
 
-    //Google Dependencies
-    implementation "com.google.android.play:core:$play_core_version"
-
-    //Dagger Dependencies
-    implementation libs.dagger
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    kapt libs.daggerCompailer
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-
     //Retrofit Dependencies
     implementation libs.retrofit
     implementation libs.rxjava
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //hilt Dependencies
+    implementation libs.hilt
+    kapt libs.hiltCompailer
 }
