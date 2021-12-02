@@ -1,10 +1,9 @@
 # ProjectSturtures
 
-### MVP
+### MVVM
 ### Clean Architecture
-### Dagger 2
-### RX Java
+### Hilt Dagger
+### Coroutines
 ### Retrofit
 ### Glide
 ### App Bundle
-### Dynamic Feature
