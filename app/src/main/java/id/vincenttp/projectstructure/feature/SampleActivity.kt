@@ -1,16 +1,30 @@
 package id.vincenttp.projectstructure.feature
 
-import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import id.vincenttp.projectstructure.R
 import id.vincenttp.projectstructure.base.BaseActivity
+import id.vincenttp.projectstructure.databinding.ActivitySampleBinding
 
 @AndroidEntryPoint
-class SampleActivity : BaseActivity() {
+class SampleActivity : BaseActivity<ActivitySampleBinding>() {
+    private val viewModel by viewModels<SampleViewModel> { defaultViewModelProviderFactory }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sample)
-
+    init {
+        lifecycleScope.launchWhenStarted {
+            viewModel.getDetail()
+        }
     }
+
+    override fun initViewBinding() = ActivitySampleBinding.inflate(layoutInflater)
+
+    override fun onInitView() {
+    }
+
+    override fun onInitObserve() {
+        viewModel.details.observe(this){
+            binding.tvName.text = it.username
+        }
+    }
+
 }

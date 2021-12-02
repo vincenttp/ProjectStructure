@@ -44,9 +44,8 @@ dependencies {
 
     //Retrofit Dependencies
     implementation libs.retrofit
-    implementation libs.rxjava
     implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation support.coroutines
 
     //hilt Dependencies
     implementation libs.hilt
