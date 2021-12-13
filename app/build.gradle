@@ -80,6 +80,10 @@ dependencies {
     implementation support.appcompat
     implementation support.constraint
     implementation support.recyclerView
+    implementation support.navFragment
+    implementation support.navUi
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     androidTestImplementation tests.runner
     androidTestImplementation tests.espresso
 
